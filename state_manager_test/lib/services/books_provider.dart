@@ -1,51 +1,49 @@
-class Book {
-  late String name;
-  late bool isBookTaken;
-
-  Book(this.name, this.isBookTaken);
-}
-
 class BooksProvider {
-  List<Book> allBooks = [
-    Book('Колобок', true),
-    Book('Букварь', false),
-    Book('Отцы и дети', true),
-    Book('Шоколад', false),
-    Book('Поваренная книга анархиста', true),
-    Book('Отцы и дети', false),
-    Book('Граф Монте-Кристо', true),
-    Book('Война и Мир', true),
-    Book('На дне', true),
-    Book('Волшеьник стрнаы Оз', false),
-    Book('Отцы и дети', false),
-    Book('Атлант расправил плечи', false),
-    Book('Кладбише домашних животных', false),
-    Book('Осознанное питание', false),
-    Book('1984', false),
+  List<String> booksInStorage = [
+    'Колобок',
+    'Букварь',
+    'Отцы и дети',
+    'Шоколад',
+    'Поваренная книга анархиста',
+    'Отцы и дети',
+    'Граф Монте-Кристо',
+    'Война и Мир',
+    'На дне',
+    'Волшеьник стрнаы Оз',
+    'Отцы и дети',
+    'Атлант расправил плечи',
+    'Кладбише домашних животных',
+    'Осознанное питание',
+    '1984',
   ];
 
-  List<Book> takenBooks = [];
+  List<String> takenBooks = [
+    'Ночной дозор',
+    'Час быка',
+    'Танцы на снегу',
+    'Тихий дон',
+    'Шерок Холмс'
+  ];
 
-  List<Book> getTakenBooks() {
-    List<Book> takenBooks = [];
-    for (var book in allBooks) {
-      if (book.isBookTaken == true) {
-        takenBooks.add(book);
-      }
-    }
-    this.takenBooks = takenBooks;
-    return takenBooks;
-  }
-
-  void removeBookFromTaken(int index) {
-    // var takenBook = takenBooks[index];
-
-    // for(var book in allBooks) {
-    // }
+  List<String> returnBookAt(int index) {
+    var returnedBook = takenBooks[index];
     takenBooks.removeAt(index);
+    booksInStorage.add(returnedBook);
+    return takenBooks;
   }
 
-  List<Book> getNewTakenBooks() {
+  List<String> takeBookAt(int index) {
+    var takenBook = booksInStorage[index];
+    booksInStorage.removeAt(index);
+    takenBooks.add(takenBook);
+    return booksInStorage;
+  }
+
+  List<String> getTakenBooks() {
     return takenBooks;
+  }
+
+  List<String> getBooksInStorage() {
+    return booksInStorage;
   }
 }

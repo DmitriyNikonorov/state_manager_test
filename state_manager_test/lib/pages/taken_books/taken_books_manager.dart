@@ -5,14 +5,14 @@ import 'package:state_manager_test/services/service_locator.dart';
 
 final class TakenBooksManager {
   final booksProvider = getIt<BooksProvider>();
-  final booksList = ValueNotifier<List<Book>>([]);
+  final booksList = ValueNotifier<List<String>>([]);
 
-  void removeAt(int index) {
-    booksProvider.removeBookFromTaken(index);
-    booksList.value = booksProvider.getNewTakenBooks();
+  void returnBookAt(int index) {
+    booksList.value = [];
+    booksList.value = booksProvider.returnBookAt(index);
   }
 
   void initBooksState() {
-    booksList.value.addAll(booksProvider.getTakenBooks());
+    booksList.value = booksProvider.getTakenBooks();
   }
 }

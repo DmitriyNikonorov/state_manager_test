@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'taken_books_manager.dart';
 import 'package:state_manager_test/services/service_locator.dart';
@@ -19,12 +18,22 @@ class _TakenBooksState extends State<TakenBooksView> {
     super.initState();
   }
 
+  void openBooksStorage() {
+    Navigator.pushNamedAndRemoveUntil(
+        context, '/books_storage', (route) => false);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const CupertinoPageScaffold(
-        backgroundColor: CupertinoColors.systemPurple,
-        navigationBar: CupertinoNavigationBar(middle: Text('Книги')),
-        child: BookListView());
+    return CupertinoPageScaffold(
+      backgroundColor: CupertinoColors.systemPurple,
+      navigationBar: CupertinoNavigationBar(
+          middle: const Text('Список взятых книг'),
+          trailing: CupertinoButton(
+              onPressed: openBooksStorage,
+              child: const Icon(CupertinoIcons.add))),
+      child: const BookListView(),
+    );
   }
 }
 
@@ -40,14 +49,14 @@ class BookListView extends StatelessWidget {
           return ListView.builder(
               itemCount: takenBooksManager.booksList.value.length,
               itemBuilder: (BuildContext context, int index) {
-                return Card(
-                  child: ListTile(
-                    title: Text(booksList[index].name),
-                    trailing: IconButton(
-                        icon: Icon(Icons.delete, color: Colors.red),
-                        onPressed: () {
-                          takenBooksManager.removeAt(index);
-                        }),
+                return CupertinoListTile(
+                  backgroundColor: CupertinoColors.white,
+                  title: Text(booksList[index]),
+                  trailing: CupertinoButton(
+                    child: const Text('Вернуть'),
+                    onPressed: () {
+                      takenBooksManager.returnBookAt(index);
+                    },
                   ),
                 );
               });
