@@ -20,7 +20,7 @@ class BookList extends StatelessWidget {
               trailing: CupertinoButton(
                 child: const Text('Взять'),
                 onPressed: () {
-                  booksStorageManager.showAlertDialog(context, index);
+                  booksStorageManager.takeBook(context, index);
                 },
               ),
             );
@@ -30,30 +30,3 @@ class BookList extends StatelessWidget {
     );
   }
 }
-
-// class AlertDialog extends StatelessWidget {
-//   final String alertText;
-//   final void Function() callBack;
-
-//   const AlertDialog({
-//     // super.key, 
-//     required this.alertText, 
-//     required this.callBack
-//   });
-//   // const AlertDialog({super.key});
-
-//   @override
-//   Widget build(Object context) {
-//     return CupertinoAlertDialog(
-//       // content: Text('Вы взяли ${storageBooksList.value[index]}'),
-//       content: Text(alertText),
-//       actions: [
-//         CupertinoDialogAction(
-//           isDefaultAction: true,
-//           onPressed: callBack,
-//           child: const Text('Ok'),
-//         ),
-//       ],
-//     );
-//   }
-// }

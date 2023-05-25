@@ -28,18 +28,21 @@ class BooksProvider {
   List<String> returnBookAt(int index) {
     var returnedBook = _takenBooks[index];
     _takenBooks.removeAt(index);
+    List<String> newTakenBooks = [];
+    newTakenBooks.addAll(_takenBooks);
     _booksInStorage.add(returnedBook);
-    return _takenBooks;
+    return newTakenBooks;
   }
 
   List<String> takeBookAt(int index) {
     var takenBook = _booksInStorage[index];
     _booksInStorage.removeAt(index);
+    List<String> newBooksInStorage = [];
+    newBooksInStorage.addAll(_booksInStorage);
     _takenBooks.add(takenBook);
-    return _booksInStorage;
+    return newBooksInStorage;
   }
 
   List<String> get getTakenBooks => _takenBooks;
-
   List<String> get getBooksInStorage => _booksInStorage;
 }

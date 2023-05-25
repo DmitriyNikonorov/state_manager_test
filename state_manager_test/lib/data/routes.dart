@@ -1,4 +1,4 @@
 class Routes {
-  static String takenBooksPage = '/';
-  static String booksStoragePage = '/books_storage';
+  static const String takenBooksPage = '/';
+  static const String booksStoragePage = '/books_storage';
 }

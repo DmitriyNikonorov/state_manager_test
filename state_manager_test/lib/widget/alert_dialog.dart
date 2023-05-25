@@ -2,13 +2,16 @@ import 'package:flutter/cupertino.dart';
 
 class AlertDialog extends StatelessWidget {
   final String alertText;
-  final void Function() callBack;
+  final VoidCallback callBack;
 
-  const AlertDialog(
-      {super.key, required this.alertText, required this.callBack});
+  const AlertDialog({
+    super.key,
+    required this.alertText,
+    required this.callBack,
+  });
 
   @override
-  Widget build(Object context) {
+  Widget build(BuildContext context) {
     return CupertinoAlertDialog(
       content: Text(alertText),
       actions: [
