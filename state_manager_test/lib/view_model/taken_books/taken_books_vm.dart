@@ -11,9 +11,10 @@ final class TakenBooksVM {
 
   void returnBookAt(int index) {
     booksList.value = _booksProvider.returnBookAt(index);
+    _updateTimersAt(index);
   }
 
-  void updateTimersAt(int index) {
+  void _updateTimersAt(int index) {
     timeUpNotifiers[index].stop();
     timeUpNotifiers.removeAt(index);
 

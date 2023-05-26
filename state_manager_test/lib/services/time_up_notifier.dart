@@ -11,20 +11,26 @@ class TimeUpNotifier extends ValueNotifier<String> {
   late StreamSubscription _subscription;
 
   static String _durationString(int duration) {
-    final hours =
-        (((duration / 60) / 60) % 60).floor().toString().padLeft(2, '0');
-    final minutes = ((duration / 60) % 60).floor().toString().padLeft(2, '0');
-    final seconds = (duration % 60).floor().toString().padLeft(2, '0');
+    final hours = _toStringConversation((((duration / 60) / 60) % 60));
+    final minutes = _toStringConversation(((duration / 60) % 60));
+    final seconds = _toStringConversation((duration % 60));
     return '$hours:$minutes:$seconds';
+  }
+
+  static String _toStringConversation(double duration) {
+    return duration.floor().toString().padLeft(2, '0');
   }
 
   void start() {
     var counter = 0;
-    _timer = Timer.periodic(const Duration(milliseconds: 1000), (Timer t) {
+    var duration = const Duration(milliseconds: 1000);
+
+    void timerWork(Timer t) {
       counter++;
       _stream.add(counter);
-    });
+    }
 
+    _timer = Timer.periodic(duration, timerWork);
     _subscription = _stream.stream.listen((item) => _updateTimeLeft(item));
   }
 

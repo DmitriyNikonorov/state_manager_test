@@ -4,20 +4,21 @@ import 'package:state_manager_test/services/service_locator.dart';
 import 'package:state_manager_test/pages/taken_books/timer_label.dart';
 import 'package:flutter/material.dart';
 
-class BookList extends StatelessWidget {
-  const BookList({super.key});
+class TakenBookList extends StatelessWidget {
+  const TakenBookList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final takenBooksManager = getIt<TakenBooksVM>();
+    final takenBooksVM = getIt<TakenBooksVM>();
     return ValueListenableBuilder(
-      valueListenable: takenBooksManager.booksList,
+      valueListenable: takenBooksVM.booksList,
       builder: (_, booksList, __) {
         return ListView.builder(
           itemCount: booksList.length,
           itemBuilder: (BuildContext context, int index) {
             return Card(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CupertinoListTile(
                     backgroundColor: CupertinoColors.white,
@@ -25,19 +26,14 @@ class BookList extends StatelessWidget {
                     trailing: CupertinoButton(
                       child: const Text('Вернуть'),
                       onPressed: () {
-                        takenBooksManager.returnBookAt(index);
-                        takenBooksManager.updateTimersAt(index);
+                        takenBooksVM.returnBookAt(index);
                       },
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Padding(padding: EdgeInsets.only(left: 18)),
-                      TimerLabel(index: index),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 0, 8),
+                    child: TimerLabel(index: index),
                   ),
-                  const Padding(padding: EdgeInsets.only(bottom: 12)),
                 ],
               ),
             );

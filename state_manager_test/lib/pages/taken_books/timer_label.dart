@@ -11,10 +11,10 @@ class TimerLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final takenBooksManager = getIt<TakenBooksVM>();
-    takenBooksManager.createTimeUpNotifier();
+    final takenBooksVM = getIt<TakenBooksVM>();
+    takenBooksVM.createTimeUpNotifier();
     return ValueListenableBuilder(
-      valueListenable: takenBooksManager.timeUpNotifiers[index],
+      valueListenable: takenBooksVM.timeUpNotifiers[index],
       builder: (_, timeUp, __) {
         return Text('книга у вас: $timeUp');
       },

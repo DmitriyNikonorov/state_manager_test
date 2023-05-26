@@ -11,11 +11,11 @@ class BooksStoragePage extends StatefulWidget {
 }
 
 class _BooksStoragePageState extends State<BooksStoragePage> {
-  final _takenBooksManager = getIt<BooksStorageVM>();
+  final _takenBooksVM = getIt<BooksStorageVM>();
 
   @override
   void initState() {
-    _takenBooksManager.initBooksState();
+    _takenBooksVM.initBooksState();
     super.initState();
   }
 
@@ -27,7 +27,7 @@ class _BooksStoragePageState extends State<BooksStoragePage> {
         middle: const Text('Доступные книги'),
         leading: CupertinoButton(
           onPressed: () {
-            _takenBooksManager.backToTakenBooks(context);
+            _takenBooksVM.backToTakenBooks(context);
           },
           child: const Icon(CupertinoIcons.back),
         ),

@@ -7,9 +7,9 @@ class BookList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final booksStorageManager = getIt<BooksStorageVM>();
+    final booksStorageVM = getIt<BooksStorageVM>();
     return ValueListenableBuilder(
-      valueListenable: booksStorageManager.storageBooksList,
+      valueListenable: booksStorageVM.storageBooksList,
       builder: (_, booksList, __) {
         return ListView.builder(
           itemCount: booksList.length,
@@ -20,7 +20,7 @@ class BookList extends StatelessWidget {
               trailing: CupertinoButton(
                 child: const Text('Взять'),
                 onPressed: () {
-                  booksStorageManager.takeBook(context, index);
+                  booksStorageVM.takeBook(context, index);
                 },
               ),
             );
